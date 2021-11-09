@@ -51,13 +51,36 @@
 
     .price {
       color: #212529;
-      font-size: 13px;
     }
     .priceInBtc {
       color: #868E96;
-      font-size: 12px;
+      font-size: 14px;
       letter-spacing: 0.01em;
     }
   }
 }
 
+
+.addAsset {
+  margin-top: 16px;
+  width: max-content;
+  align-items: center;
+  display: flex;
+  padding: 10px 22px;
+  border: 1px solid #AEB1C2;
+  border-radius: 48px;
+  cursor: pointer;
+
+  & > svg {
+    color: #495057;
+    margin-right: 10px;
+  }
+
+  & > span {
+    color: #212529;
+  }
+
+  &:hover {
+    border-color: #212529;
+  }
+}

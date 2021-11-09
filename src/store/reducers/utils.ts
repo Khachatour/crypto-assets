@@ -3,7 +3,8 @@ import { UTILS_ACTIONS } from "../actions/utils/types";
 
 const initialState = {
   activeTab: TABS.CRYPTO,
-  assets: [DEFAULT_ASSETS.BTC, DEFAULT_ASSETS.ETH, DEFAULT_ASSETS.BNB, DEFAULT_ASSETS.BAT]
+  assets: [DEFAULT_ASSETS.BTC, DEFAULT_ASSETS.ETH, DEFAULT_ASSETS.BNB, DEFAULT_ASSETS.BAT],
+  btcToUsd: 1,
 }
 
 const reducer = (state = initialState, action: UTILS_ACTIONS) => {
@@ -12,6 +13,12 @@ const reducer = (state = initialState, action: UTILS_ACTIONS) => {
       return {
         ...state, 
         activeTab: action.value,
+      };
+      
+    case 'SET_BTC_TO_USD':
+      return {
+        ...state, 
+        btcToUsd: action.value,
       };
     default: return state;
   }
