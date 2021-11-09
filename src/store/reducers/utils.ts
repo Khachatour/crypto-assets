@@ -27,6 +27,13 @@ const reducer = (state = initialState, action: UTILS_ACTIONS) => {
         ...state, 
         assetModal: !state.assetModal,
       };
+
+    case 'SET_MORE_ASSETS': 
+      return {
+        ...state,
+        assets: [...state.assets, ...action.value]
+      }
+      
     default: return state;
   }
 };

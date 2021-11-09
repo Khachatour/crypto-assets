@@ -11,6 +11,12 @@ body {
   box-sizing: border-box;
 }
 
+@media (max-width: 768px) {
+  .tabSection {
+    display: none;
+  }
+}
+
 .App {
   display: flex;
   flex-wrap: wrap;

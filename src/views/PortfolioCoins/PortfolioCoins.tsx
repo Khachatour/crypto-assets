@@ -1,37 +1,21 @@
 import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { Search } from '../../assets/Search'
-import { Plus } from '../../assets/Plus'
-import { ASSET_IMAGE_MAP, DEFAULT_ASSETS } from '../../constants'
+
 import { RootState } from '../../store'
+import { Plus } from '../../assets/Plus'
+import { Search } from '../../assets/Search'
+import { ASSET_IMAGE_MAP, DEFAULT_ASSETS } from '../../constants'
+
+import { toggleAssetModal } from '../../store/actions/utils'
+import { MainAsset } from '../../store/actions/assets/types'
+import { filteredAssets, parsePrice, parseToBtc } from './utils'
 
 import styles from './PortfolioCoins.module.scss'
-import { toggleAssetModal } from '../../store/actions/utils'
-
-const parsePrice = (price: number) => {
-  const parsedValue = new Intl.NumberFormat('en-US', {
-    style: 'currency',
-    currency: 'USD',
-  }).format(price);
-
-  return parsedValue
-}
-
-const parseToBtc = (price: number, btcToUsd: number) => {
-  return price / btcToUsd
-}
-
-const filteredAssets = (assets: Array<any>, searchTerm: string) => {
-  return assets.filter(asset => {
-    return asset.name.toLowerCase().includes(searchTerm.toLowerCase());
-  })
-}
-
 
 const PortfolioCoins = () => {
   const [searchTerm, setSearchTerm] = useState('')
   const dispatch = useDispatch()
-  const _selectedAssets = useSelector<RootState, Array<{name: string, price: number, symbol: string}>>(state => state.assets)
+  const _selectedAssets = useSelector<RootState, Array<MainAsset>>(state => state.assets)
   const [selectedAssets, setAssets] = useState(_selectedAssets)
   const btcToUsd = useSelector<RootState, number>(state => state.utils.btcToUsd)
 
