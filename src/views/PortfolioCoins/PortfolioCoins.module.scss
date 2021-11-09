@@ -1,0 +1,63 @@
+.search {
+  width: 100%;
+  border: 1px solid #AEB1C2;
+  display: flex;
+  align-items: center;
+  position: relative;
+  border-radius: 12px;
+  padding: 9px 13px;
+
+  input {
+    font-family: Poppins;
+    border: none;
+    outline: none;
+    height: 100%;
+    width: 100%;
+    padding-left: 25px;
+  }
+
+  svg {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+}
+
+.assetList {
+  display: flex;
+  flex-direction: column;
+}  
+
+.assetRow {
+  margin-top: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-family: Poppins;
+
+  .assetInfo {
+    display: flex;
+    color: #212529;
+
+    & > img {
+      margin-right: 8px;
+    }
+  }
+
+  .assetPrice {
+    display: flex;  
+    flex-direction: column;
+    align-items: flex-end;
+
+    .price {
+      color: #212529;
+      font-size: 13px;
+    }
+    .priceInBtc {
+      color: #868E96;
+      font-size: 12px;
+      letter-spacing: 0.01em;
+    }
+  }
+}
+

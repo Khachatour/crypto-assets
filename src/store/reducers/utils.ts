@@ -1,14 +1,9 @@
+import { DEFAULT_ASSETS, TABS } from "../../constants";
 import { UTILS_ACTIONS } from "../actions/utils/types";
-
-const TABS = {
-  CRYPTO: 'crypto',
-  REWARDS: 'rewards',
-  CARDS: 'cards',
-  ADD_EXCHANGE: 'add_exchange'
-}
 
 const initialState = {
   activeTab: TABS.CRYPTO,
+  assets: [DEFAULT_ASSETS.BTC, DEFAULT_ASSETS.ETH, DEFAULT_ASSETS.BNB, DEFAULT_ASSETS.BAT]
 }
 
 const reducer = (state = initialState, action: UTILS_ACTIONS) => {
