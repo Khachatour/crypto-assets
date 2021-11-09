@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Search } from '../../assets/Search'
 import { Plus } from '../../assets/Plus'
@@ -21,11 +21,34 @@ const parseToBtc = (price: number, btcToUsd: number) => {
   return price / btcToUsd
 }
 
+const filteredAssets = (assets: Array<any>, searchTerm: string) => {
+  return assets.filter(asset => {
+    return asset.name.toLowerCase().includes(searchTerm.toLowerCase());
+  })
+}
+
+
 const PortfolioCoins = () => {
-  const [searchTerm, setSearch] = useState('')
+  const [searchTerm, setSearchTerm] = useState('')
   const dispatch = useDispatch()
-  const selectedAssets = useSelector<RootState, Array<{name: string, price: number, symbol: string}>>(state => state.assets)
+  const _selectedAssets = useSelector<RootState, Array<{name: string, price: number, symbol: string}>>(state => state.assets)
+  const [selectedAssets, setAssets] = useState(_selectedAssets)
   const btcToUsd = useSelector<RootState, number>(state => state.utils.btcToUsd)
+
+
+  useEffect(() => {
+    setAssets(_selectedAssets)
+  }, [_selectedAssets])
+
+
+  useEffect(() => {
+    if(searchTerm) {
+      const filtered = filteredAssets(selectedAssets, searchTerm)
+      setAssets(filtered)
+    } else {
+      setAssets(_selectedAssets)
+    }
+  }, [searchTerm])
 
   return (
     <>
@@ -40,7 +63,7 @@ const PortfolioCoins = () => {
           value={searchTerm}
           className={styles.input} 
           placeholder="Search Coins" 
-          onChange={(e) => setSearch(e.target.value)}
+          onChange={(e) => setSearchTerm(e.target.value)}
         />
       </form>
       <div className={styles.assetList}>

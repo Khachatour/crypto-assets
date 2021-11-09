@@ -18,14 +18,17 @@ const useAssetList = () => {
   const selectedAssets = useSelector<RootState, string[]>(state => state.utils.assets)
 
   useEffect(() => {
-    fetch(`http://localhost:5000/assets?symbols=${selectedAssets.join(',')}`)
+    const intervalId = setInterval(() => {
+      fetch(`http://localhost:5000/assets?symbols=${selectedAssets.join(',')}`)
       .then(res => res.json())
       .then((defaultAssets) => {
         const transformedAssets = transformAssets(selectedAssets, defaultAssets.data)
         dispatch(setDefaultAssets(transformedAssets))
       })
+    }, 5000)
+    return () => clearInterval(intervalId)
   }, [])
-  
+
 }
 
 
