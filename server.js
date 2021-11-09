@@ -36,3 +36,21 @@ app.get("/assets", (req, res) => {
     res.send(response);
   });
  })
+
+
+ const list = {
+  method: 'GET',
+  uri: 'https://pro-api.coinmarketcap.com/v1/cryptocurrency/listings/latest',
+  headers: {
+    'X-CMC_PRO_API_KEY': '2533724a-c9d1-4ed7-83d3-86849785e543'
+  },
+  json: true,
+  gzip: true
+};
+
+app.get("/list", (_, res) => {
+  requestPromise(list).then(response => {
+    res.setHeader('Access-Control-Allow-Origin', '*')
+    res.send(response);
+  });
+ })

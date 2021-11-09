@@ -5,6 +5,7 @@ const initialState = {
   activeTab: TABS.CRYPTO,
   assets: [DEFAULT_ASSETS.BTC, DEFAULT_ASSETS.ETH, DEFAULT_ASSETS.BNB, DEFAULT_ASSETS.BAT],
   btcToUsd: 1,
+  assetModal: false
 }
 
 const reducer = (state = initialState, action: UTILS_ACTIONS) => {
@@ -19,6 +20,12 @@ const reducer = (state = initialState, action: UTILS_ACTIONS) => {
       return {
         ...state, 
         btcToUsd: action.value,
+      };
+
+    case 'TOGGLE_ASSET_MODAL':
+      return {
+        ...state, 
+        assetModal: !state.assetModal,
       };
     default: return state;
   }

@@ -1,11 +1,12 @@
 import { useState } from 'react'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { Search } from '../../assets/Search'
 import { Plus } from '../../assets/Plus'
 import { ASSET_IMAGE_MAP, DEFAULT_ASSETS } from '../../constants'
 import { RootState } from '../../store'
 
 import styles from './PortfolioCoins.module.scss'
+import { toggleAssetModal } from '../../store/actions/utils'
 
 const parsePrice = (price: number) => {
   const parsedValue = new Intl.NumberFormat('en-US', {
@@ -22,6 +23,7 @@ const parseToBtc = (price: number, btcToUsd: number) => {
 
 const PortfolioCoins = () => {
   const [searchTerm, setSearch] = useState('')
+  const dispatch = useDispatch()
   const selectedAssets = useSelector<RootState, Array<{name: string, price: number, symbol: string}>>(state => state.assets)
   const btcToUsd = useSelector<RootState, number>(state => state.utils.btcToUsd)
 
@@ -57,7 +59,7 @@ const PortfolioCoins = () => {
           </div>
         ))}
       </div>
-      <div role="button" className={styles.addAsset}>
+      <div role="button" className={styles.addAsset} onClick={() => dispatch(toggleAssetModal())}>
         <Plus />
         <span>Add Asset</span>
       </div>
