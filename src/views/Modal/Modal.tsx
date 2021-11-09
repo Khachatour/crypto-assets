@@ -13,6 +13,7 @@ const Modal = () => {
     fetch(`http://localhost:5000/list`)
       .then(res => res.json())
       .then((defaultAssets) => {
+        console.table("LOGGIN LIST ASSETS:", defaultAssets)
         const assets = defaultAssets.data.map((a: MainAsset) => {
           return {
             name: a.name,

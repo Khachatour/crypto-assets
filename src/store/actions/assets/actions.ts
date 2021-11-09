@@ -21,6 +21,7 @@ export const getAssets = ()=> (dispatch: Dispatch | (() => void), getState: () =
   fetch(`http://localhost:5000/assets?symbols=${selectedAssets.join(',')}`)
     .then(res => res.json())
     .then((defaultAssets) => {
+      console.log('LOGGING ASSETS FOR MAIN VIEW:', defaultAssets)
       const transformedAssets = transformAssets(selectedAssets, defaultAssets.data)
       //@ts-ignore
       dispatch(setDefaultAssets(transformedAssets))
